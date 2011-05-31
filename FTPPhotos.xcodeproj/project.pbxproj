@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9AC4AF861394839C0018888C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC4AF851394839C0018888C /* UIKit.framework */; };
+		9AC4AF881394839C0018888C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC4AF871394839C0018888C /* Foundation.framework */; };
+		9AC4AF8A1394839C0018888C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC4AF891394839C0018888C /* CoreGraphics.framework */; };
+		9AC4AF901394839C0018888C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AC4AF8E1394839C0018888C /* InfoPlist.strings */; };
+		9AC4AF931394839C0018888C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4AF921394839C0018888C /* main.m */; };
+		9AC4AF961394839C0018888C /* FTPPhotosAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4AF951394839C0018888C /* FTPPhotosAppDelegate.m */; };
+		9AC4AF991394839C0018888C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AC4AF971394839C0018888C /* MainWindow.xib */; };
+		9AC4AF9C1394839C0018888C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AC4AF9B1394839C0018888C /* RootViewController.m */; };
+		9AC4AF9F1394839C0018888C /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AC4AF9D1394839C0018888C /* RootViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9AC4AF811394839C0018888C /* FTPPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTPPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AC4AF851394839C0018888C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9AC4AF871394839C0018888C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9AC4AF891394839C0018888C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9AC4AF8D1394839C0018888C /* FTPPhotos-Info.plist */ = {isa = PBXFileReference; path = "FTPPhotos-Info.plist"; sourceTree = "<group>"; };
+		9AC4AF8F1394839C0018888C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9AC4AF911394839C0018888C /* FTPPhotos-Prefix.pch */ = {isa = PBXFileReference; path = "FTPPhotos-Prefix.pch"; sourceTree = "<group>"; };
+		9AC4AF921394839C0018888C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9AC4AF941394839C0018888C /* FTPPhotosAppDelegate.h */ = {isa = PBXFileReference; path = FTPPhotosAppDelegate.h; sourceTree = "<group>"; };
+		9AC4AF951394839C0018888C /* FTPPhotosAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTPPhotosAppDelegate.m; sourceTree = "<group>"; };
+		9AC4AF981394839C0018888C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		9AC4AF9A1394839C0018888C /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
+		9AC4AF9B1394839C0018888C /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		9AC4AF9E1394839C0018888C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9AC4AF7E1394839C0018888C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AC4AF861394839C0018888C /* UIKit.framework in Frameworks */,
+				9AC4AF881394839C0018888C /* Foundation.framework in Frameworks */,
+				9AC4AF8A1394839C0018888C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9AC4AF761394839C0018888C = {
+			isa = PBXGroup;
+			children = (
+				9AC4AF8B1394839C0018888C /* FTPPhotos */,
+				9AC4AF841394839C0018888C /* Frameworks */,
+				9AC4AF821394839C0018888C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9AC4AF821394839C0018888C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9AC4AF811394839C0018888C /* FTPPhotos.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9AC4AF841394839C0018888C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AC4AF851394839C0018888C /* UIKit.framework */,
+				9AC4AF871394839C0018888C /* Foundation.framework */,
+				9AC4AF891394839C0018888C /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9AC4AF8B1394839C0018888C /* FTPPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				9AC4AF941394839C0018888C /* FTPPhotosAppDelegate.h */,
+				9AC4AF951394839C0018888C /* FTPPhotosAppDelegate.m */,
+				9AC4AF971394839C0018888C /* MainWindow.xib */,
+				9AC4AF9A1394839C0018888C /* RootViewController.h */,
+				9AC4AF9B1394839C0018888C /* RootViewController.m */,
+				9AC4AF9D1394839C0018888C /* RootViewController.xib */,
+				9AC4AF8C1394839C0018888C /* Supporting Files */,
+			);
+			path = FTPPhotos;
+			sourceTree = "<group>";
+		};
+		9AC4AF8C1394839C0018888C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9AC4AF8D1394839C0018888C /* FTPPhotos-Info.plist */,
+				9AC4AF8E1394839C0018888C /* InfoPlist.strings */,
+				9AC4AF911394839C0018888C /* FTPPhotos-Prefix.pch */,
+				9AC4AF921394839C0018888C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9AC4AF801394839C0018888C /* FTPPhotos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AC4AFA21394839C0018888C /* Build configuration list for PBXNativeTarget "FTPPhotos" */;
+			buildPhases = (
+				9AC4AF7D1394839C0018888C /* Sources */,
+				9AC4AF7E1394839C0018888C /* Frameworks */,
+				9AC4AF7F1394839C0018888C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FTPPhotos;
+			productName = FTPPhotos;
+			productReference = 9AC4AF811394839C0018888C /* FTPPhotos.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9AC4AF781394839C0018888C /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 9AC4AF7B1394839C0018888C /* Build configuration list for PBXProject "FTPPhotos" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9AC4AF761394839C0018888C;
+			productRefGroup = 9AC4AF821394839C0018888C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9AC4AF801394839C0018888C /* FTPPhotos */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9AC4AF7F1394839C0018888C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AC4AF901394839C0018888C /* InfoPlist.strings in Resources */,
+				9AC4AF991394839C0018888C /* MainWindow.xib in Resources */,
+				9AC4AF9F1394839C0018888C /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9AC4AF7D1394839C0018888C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AC4AF931394839C0018888C /* main.m in Sources */,
+				9AC4AF961394839C0018888C /* FTPPhotosAppDelegate.m in Sources */,
+				9AC4AF9C1394839C0018888C /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9AC4AF8E1394839C0018888C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AC4AF8F1394839C0018888C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9AC4AF971394839C0018888C /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AC4AF981394839C0018888C /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		9AC4AF9D1394839C0018888C /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9AC4AF9E1394839C0018888C /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9AC4AFA01394839C0018888C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9AC4AFA11394839C0018888C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		9AC4AFA31394839C0018888C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FTPPhotos/FTPPhotos-Prefix.pch";
+				INFOPLIST_FILE = "FTPPhotos/FTPPhotos-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9AC4AFA41394839C0018888C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FTPPhotos/FTPPhotos-Prefix.pch";
+				INFOPLIST_FILE = "FTPPhotos/FTPPhotos-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9AC4AF7B1394839C0018888C /* Build configuration list for PBXProject "FTPPhotos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AC4AFA01394839C0018888C /* Debug */,
+				9AC4AFA11394839C0018888C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9AC4AFA21394839C0018888C /* Build configuration list for PBXNativeTarget "FTPPhotos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AC4AFA31394839C0018888C /* Debug */,
+				9AC4AFA41394839C0018888C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9AC4AF781394839C0018888C /* Project object */;
+}
