@@ -7,13 +7,101 @@
 //
 
 #import "RootViewController.h"
+#import "FTPViewController.h"
 
 @implementation RootViewController
+@synthesize photos, picker, addPhotoButton;
 
 - (void)viewDidLoad
 {
+    // initialize navigation bar stuff
+    addPhotoButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Photo" style:UIBarButtonItemStyleBordered target:self action:@selector(addPhoto:)];
+    self.navigationItem.rightBarButtonItem = addPhotoButton;
+    self.title = @"Select Photos";
+    UIBarButtonItem *pushToServer = [[UIBarButtonItem alloc] initWithTitle:@"Upload" style:UIBarButtonItemStyleBordered target:self action:@selector(showFTPView:)];
+    self.navigationItem.leftBarButtonItem = pushToServer;
+    
+    // initialize the array for the photos
+    self.photos = [[NSMutableArray alloc] initWithCapacity:50];   
+    
+    [pushToServer release];
     [super viewDidLoad];
 }
+
+- (void) showFTPView:(id) sender {
+    if(photos.count > 0) {
+        FTPViewController *ftpView = [[FTPViewController alloc] init];
+        ftpView.photos = self.photos;
+        [self.navigationController pushViewController:ftpView animated:NO];
+        [ftpView release];
+    }
+}
+
+- (void)addPhoto:(id) sender {
+    picker = [[UIImagePickerController alloc] init]; 
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; 
+    picker.delegate = self;
+    [self presentModalViewController:self.picker animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *) img editingInfo:(NSDictionary *)editInfo {
+    [self.photos addObject:img];
+    [[self.picker parentViewController] dismissModalViewControllerAnimated:YES];
+    [self.tableView reloadData];
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [photos count];
+}
+
+// scale an image
+- (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    UIImage *photo = [self.photos objectAtIndex: [indexPath row]];
+    UIImage *previousPhoto = nil; 
+    
+    if ([self.photos count] > ([indexPath row] + 1)) {
+        previousPhoto = [self.photos objectAtIndex: ([indexPath row] + 1)];
+    }
+    
+    //[cell addSubview:photoView];
+    cell.imageView.image = photo;
+    // Configure the cell.
+    return cell;
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -42,31 +130,6 @@
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
  */
-
-// Customize the number of sections in the table view.
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 0;
-}
-
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-
-    // Configure the cell.
-    return cell;
-}
 
 /*
 // Override to support conditional editing of the table view.
@@ -138,6 +201,10 @@
 
 - (void)dealloc
 {
+    [addPhotoButton dealloc];
+    [photos dealloc];
+    [picker dealloc];
+    
     [super dealloc];
 }
 

@@ -8,9 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RootViewController : UITableViewController {
+@interface RootViewController : UITableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+    NSMutableArray *photos;
+    UIImagePickerController *picker;
+    UIBarButtonItem *addPhotoButton;
 
+    
 }
 
+@property (nonatomic, retain) NSMutableArray *photos;
+@property (nonatomic, retain) UIImagePickerController *picker;
+@property (nonatomic, retain) UIBarButtonItem *addPhotoButton;
 
+- (void) loadPhotos;
+- (void) addPhoto:(id) sender;
+- (void) showFTPView:(id) sender;
+- (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 @end

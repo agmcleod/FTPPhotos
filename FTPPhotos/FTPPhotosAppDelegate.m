@@ -13,13 +13,15 @@
 
 @synthesize window=_window;
 
-@synthesize navigationController=_navigationController;
+@synthesize navigationController, rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    // Add the navigation controller's view to the window and display.
-    self.window.rootViewController = self.navigationController;
+    navigationController = [[UINavigationController alloc] init];
+    
+    rootViewController = [[RootViewController alloc] init];
+    [self.navigationController pushViewController:rootViewController animated:NO];
+    [self.window addSubview:[self.navigationController view]];    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -66,7 +68,7 @@
 - (void)dealloc
 {
     [_window release];
-    [_navigationController release];
+    [navigationController release];
     [super dealloc];
 }
 
