@@ -20,7 +20,6 @@
 @property (nonatomic, retain) UIImagePickerController *picker;
 @property (nonatomic, retain) UIBarButtonItem *addPhotoButton;
 
-- (void) loadPhotos;
 - (void) addPhoto:(id) sender;
 - (void) showFTPView:(id) sender;
 - (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;

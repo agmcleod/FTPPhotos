@@ -9,20 +9,9 @@
 #import "FTPViewController.h"
 #include <CFNetwork/CFNetwork.h>
 
-@interface FTPViewController()
-
-@property (nonatomic, readonly) BOOL isSending;
-@property (nonatomic, retain) NSOutputStream *networkStream;
-@property (nonatomic, retain) NSInputStream *fileStream;
-@property (nonatomic, readonly) uint8_t *buffer;
-@property (nonatomic, assign) size_t bufferOffset;
-@property (nonatomic, assign) size_t bufferLimit;
-@property (nonatomic, assign) NSInteger networkingCount;
-
-@end
-
 @implementation FTPViewController
-@synthesize address, port, username, password, addressLabel, portLabel, usernameLabel, passwordLabel, uploadView, photos, uploadButton, cancelButton, statusLabel;
+@synthesize address, port, username, password, addressLabel, portLabel, usernameLabel, passwordLabel, uploadView, photos, uploadButton, cancelButton, statusLabel, networkingCount, 
+    activityIndicator, dataStream;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +24,8 @@
 
 - (void)dealloc
 {
+    [self _stopSendWithStatus:@"Stopped"];
+    [dataStream dealloc];
     [uploadView dealloc];
     [address dealloc];
     [port dealloc];
@@ -49,16 +40,21 @@
 
 - (IBAction) uploadPhotos:(id)sender 
 {
+    // test data
+    self.username.text = @"u45161416";
+    self.password.text = @"TstesLikBurrning";
+    self.address.text = @"ftp.allstatequebec.ca";
+    self.port.text = @"21";
+    // end test data
     for (NSInteger i = 0; i < [self.photos count]; i++) {
         if ( ! self.isSending ) {
             NSString *  filePath;
             
             // User the tag on the UIButton to determine which image to send.
+            UIImage *tempImage = [photos objectAtIndex:i];
+            filePath = @""; // TODO: get rid of later
             
-            filePath = [[photos objectAtIndex:i] fileSystemRepresentationWithPath ]; 
-            assert(filePath != nil);
-            
-            [self _startSend:filePath];
+            [self _startSend:filePath withImage:tempImage];
         }
     }    
 }
@@ -97,7 +93,6 @@
 // This is the code that actually does the networking.
 
 @synthesize networkStream = _networkStream;
-@synthesize fileStream    = _fileStream;
 @synthesize bufferOffset  = _bufferOffset;
 @synthesize bufferLimit   = _bufferLimit;
 
@@ -114,22 +109,22 @@
     return (self.networkStream != nil);
 }
 
-- (void)_startSend:(NSString *)filePath
+- (void)_startSend:(NSString *)filePath withImage:(UIImage *)img
 {
     BOOL                    success;
     NSURL *                 url;
     CFWriteStreamRef        ftpStream;
     
-    assert(filePath != nil);
-    assert([[NSFileManager defaultManager] fileExistsAtPath:filePath]);
-    assert( [filePath.pathExtension isEqual:@"png"] || [filePath.pathExtension isEqual:@"jpg"] );
+    // assert(filePath != nil);
+    // assert([[NSFileManager defaultManager] fileExistsAtPath:filePath]);
+    // assert( [filePath.pathExtension isEqual:@"png"] || [filePath.pathExtension isEqual:@"jpg"] );
     
     assert(self.networkStream == nil);      // don't tap send twice in a row!
-    assert(self.fileStream == nil);         // ditto
+    assert(self.dataStream == nil);         // ditto
     
     // First get and check the URL.
     
-    url = [self smartURLForString:self.addressLabel.text];
+    url = [self smartURLForString:self.address.text];
     success = (url != nil);
     
     if (success) {
@@ -151,10 +146,10 @@
         // Open a stream for the file we're going to send.  We do not open this stream; 
         // NSURLConnection will do it for us.
         
-        self.fileStream = [NSInputStream inputStreamWithFileAtPath:filePath];
-        assert(self.fileStream != nil);
+        // self.fileStream = [NSInputStream inputStreamWithFileAtPath:filePath];
         
-        [self.fileStream open];
+        self.dataStream = [NSInputStream inputStreamWithData: UIImageJPEGRepresentation(img, 1.0)];
+        [self.dataStream open];
         
         // Open a CFFTPStream for the URL.
         
@@ -194,9 +189,9 @@
         [self.networkStream close];
         self.networkStream = nil;
     }
-    if (self.fileStream != nil) {
-        [self.fileStream close];
-        self.fileStream = nil;
+    if (self.dataStream != nil) {
+        [self.dataStream close];
+        self.dataStream = nil;
     }
     [self _sendDidStopWithStatus:statusString];
 }
@@ -223,7 +218,7 @@
             if (self.bufferOffset == self.bufferLimit) {
                 NSInteger   bytesRead;
                 
-                bytesRead = [self.fileStream read:self.buffer maxLength:kSendBufferSize];
+                bytesRead = [self.dataStream read:self.buffer maxLength:kSendBufferSize];
                 
                 if (bytesRead == -1) {
                     [self _stopSendWithStatus:@"File read error"];
@@ -260,37 +255,17 @@
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-// A delegate method called by the URL text field when the editing is complete. 
-// We save the current value of the field in our settings.
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSString *  defaultsKey;
-    NSString *  newValue;
-    NSString *  oldValue;
-    
-    if (textField == self.urlText) {
-        defaultsKey = @"CreateDirURLText";
-    } else if (textField == self.usernameText) {
-        defaultsKey = @"Username";
-    } else if (textField == self.passwordText) {
-        defaultsKey = @"Password";
-    } else {
-        assert(NO);
-        defaultsKey = nil;          // quieten warning
+    if([textField isFirstResponder]) {
+        [textField resignFirstResponder];
+        return true;
     }
-    
-    newValue = textField.text;
-    oldValue = [[NSUserDefaults standardUserDefaults] stringForKey:defaultsKey];
-    
-    // Save the URL text if it's changed.
-    
-    assert(newValue != nil);        // what is UITextField thinking!?!
-    assert(oldValue != nil);        // because we registered a default
-    
-    if ( ! [newValue isEqual:oldValue] ) {
-        [[NSUserDefaults standardUserDefaults] setObject:newValue forKey:defaultsKey];
+    else {
+        return false;
     }
 }
+
 
 - (NSURL *)smartURLForString:(NSString *)str
 {
