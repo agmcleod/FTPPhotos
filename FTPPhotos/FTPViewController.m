@@ -53,8 +53,9 @@
             // User the tag on the UIButton to determine which image to send.
             UIImage *tempImage = [photos objectAtIndex:i];
             filePath = @""; // TODO: get rid of later
+            assert(tempImage != nil);
             
-            [self _startSend:filePath withImage:tempImage];
+            [self _startSend:filePath withImage:tempImage imageIndex:i];
         }
     }    
 }
@@ -67,6 +68,7 @@
 - (void)_sendDidStart
 {
     self.statusLabel.text = @"Sending";
+    NSLog(@"_sendDidStart");
     self.cancelButton.enabled = YES;
     [self.activityIndicator startAnimating];
     [self didStartNetworking];
@@ -82,6 +84,9 @@
 {
     if (statusString == nil) {
         statusString = @"Uploaded successfully!";
+    }
+    else {
+        self.statusLabel.text = statusString;
     }
     self.cancelButton.enabled = NO;
     [self.activityIndicator stopAnimating];
@@ -109,7 +114,7 @@
     return (self.networkStream != nil);
 }
 
-- (void)_startSend:(NSString *)filePath withImage:(UIImage *)img
+- (void)_startSend:(NSString *)filePath withImage:(UIImage *)img imageIndex:(NSInteger)number
 {
     BOOL                    success;
     NSURL *                 url;
@@ -130,9 +135,13 @@
     if (success) {
         // Add the last part of the file name to the end of the URL to form the final 
         // URL that we're going to put to.
+        NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+        // NSTimeInterval is defined as double
+        NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
+        NSString *fileName = [NSString stringWithFormat:@"%@_%d.jpg", [timeStampObj stringValue], number];
         
         url = [NSMakeCollectable(
-                                 CFURLCreateCopyAppendingPathComponent(NULL, (CFURLRef) url, (CFStringRef) [filePath lastPathComponent], false)
+                                 CFURLCreateCopyAppendingPathComponent(NULL, (CFURLRef) url, (CFStringRef) fileName, false)
                                  ) autorelease];
         success = (url != nil);
     }
@@ -212,7 +221,7 @@
         } break;
         case NSStreamEventHasSpaceAvailable: {
             [self _updateStatus:@"Sending"];
-            
+            NSLog(@"case NSStreamEventHasSpaceAvailable");
             // If we don't have any data buffered, go read the next chunk of data.
             
             if (self.bufferOffset == self.bufferLimit) {
@@ -247,7 +256,7 @@
             [self _stopSendWithStatus:@"Stream open error"];
         } break;
         case NSStreamEventEndEncountered: {
-            // ignore
+            NSLog(@"NSStreamEventEndEncountered");
         } break;
         default: {
             assert(NO);

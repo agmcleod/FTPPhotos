@@ -69,7 +69,7 @@ enum {
 - (BOOL)isImageURL:(NSURL *)url;
 - (void)didStartNetworking;
 - (void)didStopNetworking;
-- (void)_startSend:(NSString *)filePath withImage:(UIImage *)img;
+- (void)_startSend:(NSString *)filePath withImage:(UIImage *)img imageIndex:(NSInteger)number;
 - (void)_stopSendWithStatus:(NSString *)statusString;
 - (void)_sendDidStopWithStatus:(NSString *)statusString;
 

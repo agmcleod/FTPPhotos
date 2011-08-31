@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9ABE45C413B97569003D189F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABE45C313B97569003D189F /* CFNetwork.framework */; };
 		9AC4AF861394839C0018888C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC4AF851394839C0018888C /* UIKit.framework */; };
 		9AC4AF881394839C0018888C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC4AF871394839C0018888C /* Foundation.framework */; };
 		9AC4AF8A1394839C0018888C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC4AF891394839C0018888C /* CoreGraphics.framework */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9ABE45C313B97569003D189F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		9AC4AF811394839C0018888C /* FTPPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTPPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC4AF851394839C0018888C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9AC4AF871394839C0018888C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ABE45C413B97569003D189F /* CFNetwork.framework in Frameworks */,
 				9AC4AF861394839C0018888C /* UIKit.framework in Frameworks */,
 				9AC4AF881394839C0018888C /* Foundation.framework in Frameworks */,
 				9AC4AF8A1394839C0018888C /* CoreGraphics.framework in Frameworks */,
@@ -55,6 +58,7 @@
 		9AC4AF761394839C0018888C = {
 			isa = PBXGroup;
 			children = (
+				9ABE45C313B97569003D189F /* CFNetwork.framework */,
 				9AC4AF8B1394839C0018888C /* FTPPhotos */,
 				9AC4AF841394839C0018888C /* Frameworks */,
 				9AC4AF821394839C0018888C /* Products */,
