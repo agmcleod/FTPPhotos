@@ -13,6 +13,8 @@ enum {
 };
 
 @interface FTPViewController : UIViewController<NSStreamDelegate> {
+    NSInteger photoIndexToUpload;
+    
     // fields for ftp form
     UIView *uploadView;
     UITextField *address;
@@ -35,8 +37,11 @@ enum {
     size_t _bufferOffset;
     size_t _bufferLimit;
     NSInteger _networkingCount;
+
     UIActivityIndicatorView *_activityIndicator;
 }
+
+@property (nonatomic, assign) NSInteger photoIndexToUpload;
 
 @property (nonatomic, retain) IBOutlet UIView *uploadView;
 @property (nonatomic, retain) IBOutlet UITextField *address;
@@ -72,5 +77,6 @@ enum {
 - (void)_startSend:(NSString *)filePath withImage:(UIImage *)img imageIndex:(NSInteger)number;
 - (void)_stopSendWithStatus:(NSString *)statusString;
 - (void)_sendDidStopWithStatus:(NSString *)statusString;
+- (void)_sendNextPhoto;
 
 @end

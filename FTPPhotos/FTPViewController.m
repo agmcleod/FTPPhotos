@@ -11,7 +11,7 @@
 
 @implementation FTPViewController
 @synthesize address, port, username, password, addressLabel, portLabel, usernameLabel, passwordLabel, uploadView, photos, uploadButton, cancelButton, statusLabel, networkingCount, 
-    activityIndicator, dataStream;
+    activityIndicator, dataStream, photoIndexToUpload;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,24 +40,28 @@
 
 - (IBAction) uploadPhotos:(id)sender 
 {
-    // test data
+    /* test data
     self.username.text = @"u45161416";
     self.password.text = @"TstesLikBurrning";
     self.address.text = @"ftp.allstatequebec.ca";
     self.port.text = @"21";
-    // end test data
-    for (NSInteger i = 0; i < [self.photos count]; i++) {
-        if ( ! self.isSending ) {
-            NSString *  filePath;
-            
-            // User the tag on the UIButton to determine which image to send.
-            UIImage *tempImage = [photos objectAtIndex:i];
-            filePath = @""; // TODO: get rid of later
-            assert(tempImage != nil);
-            
-            [self _startSend:filePath withImage:tempImage imageIndex:i];
-        }
-    }    
+    // end test data */
+    self.photoIndexToUpload = 0;
+    [self _sendNextPhoto];
+}
+
+- (void)_sendNextPhoto
+{
+    if(self.photoIndexToUpload < [self.photos count] && !self.isSending) {
+        NSString *  filePath;
+        NSInteger i = self.photoIndexToUpload;
+        // User the tag on the UIButton to determine which image to send.
+        UIImage *tempImage = [photos objectAtIndex:i];
+        filePath = @""; // TODO: get rid of later
+        assert(tempImage != nil);
+        [self _startSend:filePath withImage:tempImage imageIndex:i];
+        self.photoIndexToUpload += 1;
+    }
 }
 
 - (IBAction) cancelAction:(id)sender 
@@ -70,6 +74,7 @@
     self.statusLabel.text = @"Sending";
     NSLog(@"_sendDidStart");
     self.cancelButton.enabled = YES;
+    self.activityIndicator.hidden = NO;
     [self.activityIndicator startAnimating];
     [self didStartNetworking];
 }
@@ -85,12 +90,13 @@
     if (statusString == nil) {
         statusString = @"Uploaded successfully!";
     }
-    else {
-        self.statusLabel.text = statusString;
-    }
+    self.statusLabel.text = statusString;
+    NSLog(statusString);
     self.cancelButton.enabled = NO;
     [self.activityIndicator stopAnimating];
+    self.activityIndicator.hidden = YES;
     [self didStopNetworking];
+    [self _sendNextPhoto];
 }
 
 #pragma mark * Core transfer code
@@ -131,6 +137,8 @@
     
     url = [self smartURLForString:self.address.text];
     success = (url != nil);
+    
+    NSLog([NSString stringWithFormat:@"i is %d", number]);
     
     if (success) {
         // Add the last part of the file name to the end of the URL to form the final 
@@ -193,12 +201,14 @@
 - (void)_stopSendWithStatus:(NSString *)statusString
 {
     if (self.networkStream != nil) {
+        NSLog(@"_stopSendWithStatus closing networkstream");
         [self.networkStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         self.networkStream.delegate = nil;
         [self.networkStream close];
         self.networkStream = nil;
     }
     if (self.dataStream != nil) {
+        NSLog(@"_stopSendWithStatus closing datastream");
         [self.dataStream close];
         self.dataStream = nil;
     }
@@ -221,17 +231,16 @@
         } break;
         case NSStreamEventHasSpaceAvailable: {
             [self _updateStatus:@"Sending"];
-            NSLog(@"case NSStreamEventHasSpaceAvailable");
             // If we don't have any data buffered, go read the next chunk of data.
             
             if (self.bufferOffset == self.bufferLimit) {
                 NSInteger   bytesRead;
-                
                 bytesRead = [self.dataStream read:self.buffer maxLength:kSendBufferSize];
                 
                 if (bytesRead == -1) {
                     [self _stopSendWithStatus:@"File read error"];
                 } else if (bytesRead == 0) {
+                    NSLog(@"Out of data");
                     [self _stopSendWithStatus:nil];
                 } else {
                     self.bufferOffset = 0;
@@ -253,10 +262,10 @@
             }
         } break;
         case NSStreamEventErrorOccurred: {
-            [self _stopSendWithStatus:@"Stream open error"];
+            [self _stopSendWithStatus:@"Stream open error. Double check your entered information."];
         } break;
         case NSStreamEventEndEncountered: {
-            NSLog(@"NSStreamEventEndEncountered");
+            
         } break;
         default: {
             assert(NO);
@@ -354,6 +363,8 @@
 
 - (void)viewDidLoad
 {
+    self.activityIndicator.hidden = YES;
+    self.cancelButton.enabled = NO;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
