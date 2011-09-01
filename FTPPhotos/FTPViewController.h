@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RootViewController.h"
 
 enum {
     kSendBufferSize = 32768
@@ -39,6 +40,7 @@ enum {
     NSInteger _networkingCount;
 
     UIActivityIndicatorView *_activityIndicator;
+    RootViewController *rootViewController;
 }
 
 @property (nonatomic, assign) NSInteger photoIndexToUpload;
@@ -65,6 +67,7 @@ enum {
 @property (nonatomic, assign) size_t bufferOffset;
 @property (nonatomic, assign) size_t bufferLimit;
 @property (nonatomic, assign) NSInteger networkingCount;
+@property (nonatomic, assign) RootViewController *rootViewController;
 
 
 - (IBAction) uploadPhotos:(id)sender;
@@ -78,5 +81,6 @@ enum {
 - (void)_stopSendWithStatus:(NSString *)statusString;
 - (void)_sendDidStopWithStatus:(NSString *)statusString;
 - (void)_sendNextPhoto;
+- (void)resetStreams;
 
 @end

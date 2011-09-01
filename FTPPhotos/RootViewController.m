@@ -10,7 +10,7 @@
 #import "FTPViewController.h"
 
 @implementation RootViewController
-@synthesize photos, picker, addPhotoButton;
+@synthesize photos, picker, addPhotoButton, clearPhotosList;
 
 - (void)viewDidLoad
 {
@@ -24,8 +24,45 @@
     // initialize the array for the photos
     self.photos = [[NSMutableArray alloc] initWithCapacity:50];   
     
+    // setup toolbar stuff
+    clearPhotosList = [[UIBarButtonItem alloc] initWithTitle:@"Remove All Photos" style:UIBarButtonItemStyleBordered target:self action:@selector(clearPhotos)];
+    NSArray *items = [NSArray arrayWithObjects:clearPhotosList, nil];
+    
+    //[self.view addSubview:toolBar];
+    [self.navigationController setToolbarHidden:NO];
+    self.toolbarItems = items;
+    
     [pushToServer release];
     [super viewDidLoad];
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
+{
+    if([[self.navigationController.viewControllers lastObject] class] == [FTPViewController class]){
+        
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration: 1.00];
+		[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown
+                               forView:self.view cache:NO];
+        
+		UIViewController *viewController = 
+            [self.navigationController popViewControllerAnimated:NO];
+        
+        FTPViewController *ftpview = ((FTPViewController *) viewController);
+        ftpview.rootViewController = self;
+        [ftpview resetStreams];
+		[UIView commitAnimations];
+        
+		return viewController;
+	} else {
+		return [self.navigationController popViewControllerAnimated:animated];
+	}
+}
+
+- (void) clearPhotos
+{
+    [self.photos removeAllObjects];
+    [self.tableView reloadData];
 }
 
 - (void) showFTPView:(id) sender {
@@ -202,6 +239,7 @@
 - (void)dealloc
 {
     [addPhotoButton dealloc];
+    [clearPhotosList dealloc];
     [photos dealloc];
     [picker dealloc];
     

@@ -11,7 +11,7 @@
 
 @implementation FTPViewController
 @synthesize address, port, username, password, addressLabel, portLabel, usernameLabel, passwordLabel, uploadView, photos, uploadButton, cancelButton, statusLabel, networkingCount, 
-    activityIndicator, dataStream, photoIndexToUpload;
+    activityIndicator, dataStream, photoIndexToUpload, rootViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,27 +25,20 @@
 - (void)dealloc
 {
     [self _stopSendWithStatus:@"Stopped"];
-    [dataStream dealloc];
-    [uploadView dealloc];
-    [address dealloc];
-    [port dealloc];
-    [username dealloc];
-    [password dealloc];
-    [addressLabel dealloc];
-    [portLabel dealloc];
-    [usernameLabel dealloc];
-    [passwordLabel dealloc];
+    [uploadView release];
+    [address release];
+    [port release];
+    [username release];
+    [password release];
+    [addressLabel release];
+    [portLabel release];
+    [usernameLabel release];
+    [passwordLabel release];
+    [photos release];
     [super dealloc];
 }
 
-- (IBAction) uploadPhotos:(id)sender 
-{
-    /* test data
-    self.username.text = @"u45161416";
-    self.password.text = @"TstesLikBurrning";
-    self.address.text = @"ftp.allstatequebec.ca";
-    self.port.text = @"21";
-    // end test data */
+- (IBAction) uploadPhotos:(id)sender {
     self.photoIndexToUpload = 0;
     [self _sendNextPhoto];
 }
@@ -62,6 +55,9 @@
         [self _startSend:filePath withImage:tempImage imageIndex:i];
         self.photoIndexToUpload += 1;
     }
+    else {
+        [self.rootViewController clearPhotos];
+    }
 }
 
 - (IBAction) cancelAction:(id)sender 
@@ -72,7 +68,6 @@
 - (void)_sendDidStart
 {
     self.statusLabel.text = @"Sending";
-    NSLog(@"_sendDidStart");
     self.cancelButton.enabled = YES;
     self.activityIndicator.hidden = NO;
     [self.activityIndicator startAnimating];
@@ -91,7 +86,6 @@
         statusString = @"Uploaded successfully!";
     }
     self.statusLabel.text = statusString;
-    NSLog(statusString);
     self.cancelButton.enabled = NO;
     [self.activityIndicator stopAnimating];
     self.activityIndicator.hidden = YES;
@@ -200,19 +194,21 @@
 
 - (void)_stopSendWithStatus:(NSString *)statusString
 {
+    [self resetStreams];
+    [self _sendDidStopWithStatus:statusString];
+}
+
+- (void)resetStreams {
     if (self.networkStream != nil) {
-        NSLog(@"_stopSendWithStatus closing networkstream");
         [self.networkStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         self.networkStream.delegate = nil;
         [self.networkStream close];
         self.networkStream = nil;
     }
     if (self.dataStream != nil) {
-        NSLog(@"_stopSendWithStatus closing datastream");
         [self.dataStream close];
         self.dataStream = nil;
     }
-    [self _sendDidStopWithStatus:statusString];
 }
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
@@ -346,9 +342,11 @@
 
 - (void)didStopNetworking
 {
-    assert(self.networkingCount > 0);
-    self.networkingCount -= 1;
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = (self.networkingCount != 0);
+    if(self.networkingCount > 0) {
+        self.networkingCount -= 1;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = 
+            (self.networkingCount != 0);
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -372,6 +370,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
