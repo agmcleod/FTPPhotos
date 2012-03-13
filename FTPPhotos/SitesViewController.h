@@ -21,7 +21,7 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain) NSMutableArray *sites;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *addButton;
+@property (nonatomic, retain) UIBarButtonItem *addButton;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolBar;
 
 - (void) fetchRecords;  

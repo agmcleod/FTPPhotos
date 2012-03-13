@@ -11,6 +11,8 @@
 		9A3EF5E2145F8BF500587C5E /* FTPPhotos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EF5E0145F8BF500587C5E /* FTPPhotos.xcdatamodeld */; };
 		9A3EF5E5145F8D6C00587C5E /* Site.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EF5E4145F8D6C00587C5E /* Site.m */; };
 		9A3EF5E7145F930000587C5E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3EF5E6145F930000587C5E /* CoreData.framework */; };
+		9A56958E150EEE730012C029 /* SitesForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A56958C150EEE730012C029 /* SitesForm.m */; };
+		9A56958F150EEE730012C029 /* SitesForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A56958D150EEE730012C029 /* SitesForm.xib */; };
 		9AA2742C14633E07000D96A8 /* SitesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA2742B14633E07000D96A8 /* SitesViewController.xib */; };
 		9AB5C775142C16C70090F089 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB5C774142C16C70090F089 /* Icon.png */; };
 		9AB5C778142C17FE0090F089 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB5C777142C17FD0090F089 /* Icon.png */; };
@@ -35,6 +37,9 @@
 		9A3EF5E3145F8D6C00587C5E /* Site.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Site.h; sourceTree = "<group>"; };
 		9A3EF5E4145F8D6C00587C5E /* Site.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Site.m; sourceTree = "<group>"; };
 		9A3EF5E6145F930000587C5E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9A56958B150EEE730012C029 /* SitesForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SitesForm.h; path = ../SitesForm.h; sourceTree = "<group>"; };
+		9A56958C150EEE730012C029 /* SitesForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SitesForm.m; path = ../SitesForm.m; sourceTree = "<group>"; };
+		9A56958D150EEE730012C029 /* SitesForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SitesForm.xib; path = ../SitesForm.xib; sourceTree = "<group>"; };
 		9AA2742B14633E07000D96A8 /* SitesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SitesViewController.xib; sourceTree = "<group>"; };
 		9AB5C774142C16C70090F089 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		9AB5C777142C17FD0090F089 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -109,6 +114,9 @@
 		9AC4AF8B1394839C0018888C /* FTPPhotos */ = {
 			isa = PBXGroup;
 			children = (
+				9A56958B150EEE730012C029 /* SitesForm.h */,
+				9A56958C150EEE730012C029 /* SitesForm.m */,
+				9A56958D150EEE730012C029 /* SitesForm.xib */,
 				9AC4AF941394839C0018888C /* FTPPhotosAppDelegate.h */,
 				9AC4AF951394839C0018888C /* FTPPhotosAppDelegate.m */,
 				9AC4AF971394839C0018888C /* MainWindow.xib */,
@@ -193,6 +201,7 @@
 				9AB5C778142C17FE0090F089 /* Icon.png in Resources */,
 				9AB5C77A142C18030090F089 /* Icon@2x.png in Resources */,
 				9AA2742C14633E07000D96A8 /* SitesViewController.xib in Resources */,
+				9A56958F150EEE730012C029 /* SitesForm.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +219,7 @@
 				9A3EF5DE145F85A500587C5E /* SitesViewController.m in Sources */,
 				9A3EF5E2145F8BF500587C5E /* FTPPhotos.xcdatamodeld in Sources */,
 				9A3EF5E5145F8D6C00587C5E /* Site.m in Sources */,
+				9A56958E150EEE730012C029 /* SitesForm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

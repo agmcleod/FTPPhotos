@@ -8,6 +8,7 @@
 
 #import "SitesViewController.h"
 #import "Site.h"
+#import "SitesForm.h"
 
 @implementation SitesViewController
 
@@ -47,17 +48,21 @@
 }
 
 - (void) addSite:(id)sender {
-    
+    SitesForm *sitesFormController = [[SitesForm alloc] init];
+    [self.navigationController pushViewController:sitesFormController animated:NO];
+    [sitesFormController release];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title = @"Manage Sites";
+    
+    addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Site" style:UIBarButtonItemStyleBordered target:self action:@selector(addSite:)];
+    
     NSArray *items = [NSArray arrayWithObjects:addButton, nil];
     self.toolbarItems = items;
     [self fetchRecords];
-    [items release];
 }
 
 
@@ -89,7 +94,7 @@
     [__managedObjectModel release];
     [__persistentStoreCoordinator release];    
     [sites release];
-    [addButton release];
+    [addButton dealloc];
     [toolBar release];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
