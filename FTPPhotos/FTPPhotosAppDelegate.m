@@ -69,6 +69,7 @@
 {
     [_window release];
     [navigationController release];
+    [rootViewController release];
     [super dealloc];
 }
 

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A3EF5DE145F85A500587C5E /* SitesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EF5DC145F85A500587C5E /* SitesViewController.m */; };
+		9A3EF5E2145F8BF500587C5E /* FTPPhotos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EF5E0145F8BF500587C5E /* FTPPhotos.xcdatamodeld */; };
+		9A3EF5E5145F8D6C00587C5E /* Site.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3EF5E4145F8D6C00587C5E /* Site.m */; };
+		9A3EF5E7145F930000587C5E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A3EF5E6145F930000587C5E /* CoreData.framework */; };
+		9AA2742C14633E07000D96A8 /* SitesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9AA2742B14633E07000D96A8 /* SitesViewController.xib */; };
+		9AB5C775142C16C70090F089 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB5C774142C16C70090F089 /* Icon.png */; };
+		9AB5C778142C17FE0090F089 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB5C777142C17FD0090F089 /* Icon.png */; };
+		9AB5C77A142C18030090F089 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB5C779142C18030090F089 /* Icon@2x.png */; };
 		9ABE45C413B97569003D189F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ABE45C313B97569003D189F /* CFNetwork.framework */; };
 		9AC4AF861394839C0018888C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC4AF851394839C0018888C /* UIKit.framework */; };
 		9AC4AF881394839C0018888C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC4AF871394839C0018888C /* Foundation.framework */; };
@@ -21,6 +29,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A3EF5DB145F85A500587C5E /* SitesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitesViewController.h; sourceTree = "<group>"; };
+		9A3EF5DC145F85A500587C5E /* SitesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitesViewController.m; sourceTree = "<group>"; };
+		9A3EF5E1145F8BF500587C5E /* FTPPhotos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FTPPhotos.xcdatamodel; sourceTree = "<group>"; };
+		9A3EF5E3145F8D6C00587C5E /* Site.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Site.h; sourceTree = "<group>"; };
+		9A3EF5E4145F8D6C00587C5E /* Site.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Site.m; sourceTree = "<group>"; };
+		9A3EF5E6145F930000587C5E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9AA2742B14633E07000D96A8 /* SitesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SitesViewController.xib; sourceTree = "<group>"; };
+		9AB5C774142C16C70090F089 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		9AB5C777142C17FD0090F089 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		9AB5C779142C18030090F089 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		9ABE45C313B97569003D189F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		9AC4AF811394839C0018888C /* FTPPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FTPPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC4AF851394839C0018888C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -45,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A3EF5E7145F930000587C5E /* CoreData.framework in Frameworks */,
 				9ABE45C413B97569003D189F /* CFNetwork.framework in Frameworks */,
 				9AC4AF861394839C0018888C /* UIKit.framework in Frameworks */,
 				9AC4AF881394839C0018888C /* Foundation.framework in Frameworks */,
@@ -58,6 +77,10 @@
 		9AC4AF761394839C0018888C = {
 			isa = PBXGroup;
 			children = (
+				9A3EF5E6145F930000587C5E /* CoreData.framework */,
+				9AB5C779142C18030090F089 /* Icon@2x.png */,
+				9AB5C777142C17FD0090F089 /* Icon.png */,
+				9AB5C774142C16C70090F089 /* Icon.png */,
 				9ABE45C313B97569003D189F /* CFNetwork.framework */,
 				9AC4AF8B1394839C0018888C /* FTPPhotos */,
 				9AC4AF841394839C0018888C /* Frameworks */,
@@ -90,11 +113,17 @@
 				9AC4AF951394839C0018888C /* FTPPhotosAppDelegate.m */,
 				9AC4AF971394839C0018888C /* MainWindow.xib */,
 				9AC4AF9A1394839C0018888C /* RootViewController.h */,
+				9AC4AF9B1394839C0018888C /* RootViewController.m */,
+				9A3EF5DB145F85A500587C5E /* SitesViewController.h */,
+				9A3EF5DC145F85A500587C5E /* SitesViewController.m */,
+				9AA2742B14633E07000D96A8 /* SitesViewController.xib */,
 				9ADE79CF13B1879C006D59CC /* FTPViewController.h */,
 				9ADE79D013B1879C006D59CC /* FTPViewController.m */,
 				9ADE79D113B1879C006D59CC /* FTPViewController.xib */,
-				9AC4AF9B1394839C0018888C /* RootViewController.m */,
 				9AC4AF8C1394839C0018888C /* Supporting Files */,
+				9A3EF5E0145F8BF500587C5E /* FTPPhotos.xcdatamodeld */,
+				9A3EF5E3145F8D6C00587C5E /* Site.h */,
+				9A3EF5E4145F8D6C00587C5E /* Site.m */,
 			);
 			path = FTPPhotos;
 			sourceTree = "<group>";
@@ -160,6 +189,10 @@
 				9AC4AF901394839C0018888C /* InfoPlist.strings in Resources */,
 				9AC4AF991394839C0018888C /* MainWindow.xib in Resources */,
 				9ADE79D313B1879C006D59CC /* FTPViewController.xib in Resources */,
+				9AB5C775142C16C70090F089 /* Icon.png in Resources */,
+				9AB5C778142C17FE0090F089 /* Icon.png in Resources */,
+				9AB5C77A142C18030090F089 /* Icon@2x.png in Resources */,
+				9AA2742C14633E07000D96A8 /* SitesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +207,9 @@
 				9AC4AF961394839C0018888C /* FTPPhotosAppDelegate.m in Sources */,
 				9AC4AF9C1394839C0018888C /* RootViewController.m in Sources */,
 				9ADE79D213B1879C006D59CC /* FTPViewController.m in Sources */,
+				9A3EF5DE145F85A500587C5E /* SitesViewController.m in Sources */,
+				9A3EF5E2145F8BF500587C5E /* FTPPhotos.xcdatamodeld in Sources */,
+				9A3EF5E5145F8D6C00587C5E /* Site.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +248,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = PicFTP;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -220,13 +258,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = PicFTP;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -235,6 +275,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -245,6 +286,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -253,6 +295,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FTPPhotos/FTPPhotos-Prefix.pch";
@@ -262,6 +305,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -289,6 +333,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9A3EF5E0145F8BF500587C5E /* FTPPhotos.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9A3EF5E1145F8BF500587C5E /* FTPPhotos.xcdatamodel */,
+			);
+			currentVersion = 9A3EF5E1145F8BF500587C5E /* FTPPhotos.xcdatamodel */;
+			path = FTPPhotos.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9AC4AF781394839C0018888C /* Project object */;
 }

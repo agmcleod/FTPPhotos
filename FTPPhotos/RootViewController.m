@@ -8,9 +8,10 @@
 
 #import "RootViewController.h"
 #import "FTPViewController.h"
+#import "SitesViewController.h"
 
 @implementation RootViewController
-@synthesize photos, picker, addPhotoButton, clearPhotosList;
+@synthesize photos, picker, addPhotoButton, clearPhotosList, gotoSites;
 
 - (void)viewDidLoad
 {
@@ -26,13 +27,18 @@
     
     // setup toolbar stuff
     clearPhotosList = [[UIBarButtonItem alloc] initWithTitle:@"Remove All Photos" style:UIBarButtonItemStyleBordered target:self action:@selector(clearPhotos)];
-    NSArray *items = [NSArray arrayWithObjects:clearPhotosList, nil];
+    gotoSites = [[UIBarButtonItem alloc] initWithTitle:@"Manage Sites" style: 
+        UIBarButtonItemStyleBordered target:self action:@selector(showSitesView:)];
+    
+    // add buttons to bottom toolbar
+    NSArray *items = [NSArray arrayWithObjects:clearPhotosList, gotoSites, nil];
     
     //[self.view addSubview:toolBar];
     [self.navigationController setToolbarHidden:NO];
     self.toolbarItems = items;
     
     [pushToServer release];
+    [items release];
     [super viewDidLoad];
 }
 
@@ -72,6 +78,12 @@
         [self.navigationController pushViewController:ftpView animated:NO];
         [ftpView release];
     }
+}
+
+- (void) showSitesView:(id)sender {
+    SitesViewController *siteView = [[SitesViewController alloc] init];
+    [self.navigationController pushViewController:siteView animated:NO];    
+    [siteView release];
 }
 
 - (void)addPhoto:(id) sender {
@@ -240,6 +252,7 @@
 {
     [addPhotoButton dealloc];
     [clearPhotosList dealloc];
+    [gotoSites dealloc];
     [photos dealloc];
     [picker dealloc];
     
