@@ -12,6 +12,8 @@
 @interface SitesViewController : UIViewController {
     UITableView *sitesView;
     NSManagedObjectContext *managedObjectContext;
+    NSManagedObjectModel *managedObjectModel;
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSMutableArray *sites;
     UIBarButtonItem *addButton;
     UIToolbar *toolBar;
@@ -26,6 +28,6 @@
 
 - (void) fetchRecords;  
 - (void) addSite:(id)sender;
-- (NSURL *)applicationDocumentsDirectory;
+- (NSString *)applicationDocumentsDirectory;
 
 @end

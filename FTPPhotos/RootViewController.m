@@ -31,14 +31,12 @@
         UIBarButtonItemStyleBordered target:self action:@selector(showSitesView:)];
     
     // add buttons to bottom toolbar
-    NSArray *items = [NSArray arrayWithObjects:clearPhotosList, gotoSites, nil];
     
     //[self.view addSubview:toolBar];
     [self.navigationController setToolbarHidden:NO];
-    self.toolbarItems = items;
+    [self setToolbarItems:[NSArray arrayWithObjects:clearPhotosList, gotoSites, nil]];
     
     [pushToServer release];
-    [items release];
     [super viewDidLoad];
 }
 

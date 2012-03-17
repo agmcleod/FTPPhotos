@@ -269,6 +269,7 @@
     }
 }
 
+// this hides the keyboard on return
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if([textField isFirstResponder]) {
