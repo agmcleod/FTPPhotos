@@ -12,10 +12,18 @@
 
 @implementation SitesViewController
 
-@synthesize sites, addButton, toolBar;
+@synthesize sites, addButton, toolBar, tableView;
 @synthesize managedObjectContext = managedObjectContext;
 @synthesize managedObjectModel = managedObjectModel;
 @synthesize persistentStoreCoordinator = persistentStoreCoordinator;
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [sites count];
+}
 
 - (void) fetchRecords {
     
@@ -77,8 +85,14 @@
     }
     managedObjectContext = [[NSManagedObjectContext alloc] init];
     [managedObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
-    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     [self fetchRecords];
+    [self setEditing:YES];
+    [self.tableView setEditing:YES];
+    [self.tableView reloadData];
 }
 
 
@@ -112,18 +126,98 @@
     [sites release];
     [addButton release];
     [toolBar release];
-    [sitesView release];
+    [tableView release];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if (!indexPath) return UITableViewCellEditingStyleNone;
+    
+    if (indexPath.row == ([sites count]))
+    {        
+        return UITableViewCellEditingStyleInsert;
+        
+    }
+    else
+    {
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleNone;    
+}
+
+- (void)tableView:(UITableView *)aTableView 
+    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if(editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        // db delete code
+        Site *site = [sites objectAtIndex: [indexPath row]];
+        [managedObjectContext deleteObject:site];
+        NSError *error = nil;
+        [managedObjectContext save:&error];
+        if(error != nil)
+        {
+            NSLog([NSString stringWithFormat:error.description]);
+        }
+        [sites removeObjectAtIndex:indexPath.row];
+        [self.tableView reloadData];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
+
+      toIndexPath:(NSIndexPath *)toIndexPath
+{
+    NSString *item = [[sites objectAtIndex:fromIndexPath.row] retain];
+    [sites removeObject:item];
+    [sites insertObject:item atIndex:toIndexPath.row];
+    [item release];
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath { 
+    
+    static NSString *CellIdentifier = @"Cell";    
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier]; 
+    
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+    }
+    Site *site = [sites objectAtIndex: [indexPath row]];
+    cell.textLabel.text = site.address;
+    
+    /* Site *previous = nil; 
+    
+    if ([sites count] > ([indexPath row] + 1)) {
+        previous = [sites objectAtIndex: ([indexPath row] + 1)];
+    } */
+    
+    return cell; 
+    
+}
+
+- (BOOL)tableView:(UITableView *)tableView 
+canEditRowAtIndexPath:(NSIndexPath *)indexPath 
+{ 
+    return YES; 
 }
 
 @end

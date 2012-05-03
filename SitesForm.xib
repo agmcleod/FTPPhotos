@@ -263,7 +263,7 @@
 					<object class="IBUIButton" id="321614372">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{124, 252}, {72, 37}}</string>
+						<string key="NSFrame">{{124, 254}, {72, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -298,7 +298,7 @@
 					<object class="IBUILabel" id="553144438">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{139, 317}, {42, 21}}</string>
+						<string key="NSFrame">{{87, 312}, {147, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -312,6 +312,7 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
 						<reference key="IBUIFontDescription" ref="962359325"/>
 						<reference key="IBUIFont" ref="50299747"/>
 					</object>
@@ -534,9 +535,9 @@ AAgACAAIAAEAAQABAAE</bytes>
 							<reference ref="693564869"/>
 							<reference ref="309785152"/>
 							<reference ref="1040936721"/>
+							<reference ref="867520995"/>
 							<reference ref="321614372"/>
 							<reference ref="553144438"/>
-							<reference ref="867520995"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
