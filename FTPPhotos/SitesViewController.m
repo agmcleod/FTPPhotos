@@ -170,7 +170,7 @@
         [managedObjectContext save:&error];
         if(error != nil)
         {
-            NSLog([NSString stringWithFormat:error.description]);
+            NSLog(error.description);
         }
         [sites removeObjectAtIndex:indexPath.row];
         [self.tableView reloadData];

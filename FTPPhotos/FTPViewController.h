@@ -30,6 +30,7 @@ enum {
     NSMutableArray *photos;
     UIButton *uploadButton;
     UIButton *cancelButton;
+    UIButton *selectSiteButton;
     
     // variables for sending the FTP request
     NSOutputStream *_networkStream;
@@ -59,6 +60,7 @@ enum {
 @property (nonatomic, retain) IBOutlet UILabel *statusLabel;
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView * activityIndicator;
+@property (nonatomic, retain) IBOutlet UIButton *selectSiteButton;
 
 @property (nonatomic, readonly) BOOL isSending;
 @property (nonatomic, retain) NSOutputStream *networkStream;
@@ -72,6 +74,7 @@ enum {
 
 - (IBAction) uploadPhotos:(id)sender;
 - (IBAction) cancelAction:(id)sender;
+- (IBAction) showSitesList:(id)sender;
 
 - (NSURL *)smartURLForString:(NSString *)str;
 - (BOOL)isImageURL:(NSURL *)url;
@@ -82,5 +85,7 @@ enum {
 - (void)_sendDidStopWithStatus:(NSString *)statusString;
 - (void)_sendNextPhoto;
 - (void)resetStreams;
+- (NSString *)applicationDocumentsDirectory;
+- (UIView *)labelCellWithWidth:(CGFloat)width rightOffset:(CGFloat)offset siteAddress:(NSString *)siteAddress;
 
 @end

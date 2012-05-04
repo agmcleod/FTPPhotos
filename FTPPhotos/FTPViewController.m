@@ -8,10 +8,12 @@
 
 #import "FTPViewController.h"
 #include <CFNetwork/CFNetwork.h>
+#import <CoreData/CoreData.h>
+#import "Site.h"
 
 @implementation FTPViewController
 @synthesize address, port, username, password, addressLabel, portLabel, usernameLabel, passwordLabel, uploadView, photos, uploadButton, cancelButton, statusLabel, networkingCount, 
-    activityIndicator, dataStream, photoIndexToUpload, rootViewController;
+    activityIndicator, dataStream, photoIndexToUpload, rootViewController, selectSiteButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +37,7 @@
     [usernameLabel release];
     [passwordLabel release];
     [photos release];
+    [selectSiteButton release];
     [super dealloc];
 }
 
@@ -42,6 +45,66 @@
     self.photoIndexToUpload = 0;
     [self _sendNextPhoto];
 }
+
+- (IBAction) showSitesList:(id)sender {
+    
+    NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    NSError * error = nil;
+    NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"FTPPhotos.sqlite"]];
+    
+    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
+    if(![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+        NSLog(@"Unresolved Error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] init];
+    [managedObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
+    
+    
+    // load the results into an array
+    NSMutableArray *sites; // = [[NSMutableArray alloc] initWithCapacity:50];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Site" inManagedObjectContext:managedObjectContext];   
+    
+    // Setup the fetch request  
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];  
+    [request setEntity:entity];   
+    
+    // Define how we will sort the records  
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"address" ascending:NO];  
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];  
+    [request setSortDescriptors:sortDescriptors];  
+    [sortDescriptor release];   
+    
+    // Fetch the records and handle an error  
+    
+    NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];   
+    
+    if (!mutableFetchResults) {  
+        // Handle the error.  
+        // This is a serious error and should advise the user to restart the application  
+    }   
+    
+    // Save our fetched data to an array  
+    sites = mutableFetchResults;
+    
+    
+    UIPickerView *pickerView = [[UIPickerView alloc] init];
+    
+    for (NSUInteger i = 0; i < [mutableFetchResults count]; i++) {
+        Site *site = [sites objectAtIndex:i];
+        UIView *view = [self labelCellWithWidth:200 rightOffset:20 siteAddress:site.address];
+        
+        [pickerView addSubview:view];
+        [view release];
+    }
+    [self.view addSubview:pickerView];
+}
+     
+ - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+     // If the user chooses a new row, update the label accordingly.
+     
+ }
 
 - (void)_sendNextPhoto
 {
@@ -91,6 +154,25 @@
     self.activityIndicator.hidden = YES;
     [self didStopNetworking];
     [self _sendNextPhoto];
+}
+
+- (UIView *)labelCellWithWidth:(CGFloat)width rightOffset:(CGFloat)offset siteAddress:(NSString *)siteAddress {
+    
+    // Create a new view that contains a label offset from the right.
+    CGRect frame = CGRectMake(0.0, 0.0, width, 32.0);
+    UIView *view = [[[UIView alloc] initWithFrame:frame] autorelease];
+    
+    frame.size.width = width - offset;
+    UILabel *subLabel = [[UILabel alloc] initWithFrame:frame];
+    subLabel.textAlignment = UITextAlignmentRight;
+    subLabel.backgroundColor = [UIColor whiteColor];
+    subLabel.font = [UIFont systemFontOfSize:24.0];
+    subLabel.userInteractionEnabled = NO;
+    subLabel.text = siteAddress;
+    
+    [view addSubview:subLabel];
+    [subLabel release];
+    return view;
 }
 
 #pragma mark * Core transfer code
@@ -333,6 +415,10 @@
         }
     }
     return result;
+}
+
+- (NSString *)applicationDocumentsDirectory {
+	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 - (void)didStartNetworking
