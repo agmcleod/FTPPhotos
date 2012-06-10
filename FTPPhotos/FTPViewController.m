@@ -13,7 +13,8 @@
 
 @implementation FTPViewController
 @synthesize address, port, username, password, addressLabel, portLabel, usernameLabel, passwordLabel, uploadView, photos, uploadButton, cancelButton, statusLabel, networkingCount, 
-    activityIndicator, dataStream, photoIndexToUpload, rootViewController, selectSiteButton;
+    activityIndicator, dataStream, photoIndexToUpload, rootViewController, selectSiteButton, sites, 
+    pickerView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +39,8 @@
     [passwordLabel release];
     [photos release];
     [selectSiteButton release];
+    [pickerView release];
+    [sites release];
     [super dealloc];
 }
 
@@ -61,8 +64,6 @@
     [managedObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
     
     
-    // load the results into an array
-    NSMutableArray *sites; // = [[NSMutableArray alloc] initWithCapacity:50];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Site" inManagedObjectContext:managedObjectContext];   
     
@@ -88,23 +89,30 @@
     // Save our fetched data to an array  
     sites = mutableFetchResults;
     
+
     
-    UIPickerView *pickerView = [[UIPickerView alloc] init];
-    
-    for (NSUInteger i = 0; i < [mutableFetchResults count]; i++) {
-        Site *site = [sites objectAtIndex:i];
-        UIView *view = [self labelCellWithWidth:200 rightOffset:20 siteAddress:site.address];
-        
-        [pickerView addSubview:view];
-        [view release];
-    }
     [self.view addSubview:pickerView];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:
+(UIPickerView *)pickerView
+{
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [sites count];
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    Site *site = [sites objectAtIndex:row];
+    return site.address;
 }
      
  - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
      // If the user chooses a new row, update the label accordingly.
      
- }
+}
 
 - (void)_sendNextPhoto
 {
@@ -156,11 +164,11 @@
     [self _sendNextPhoto];
 }
 
-- (UIView *)labelCellWithWidth:(CGFloat)width rightOffset:(CGFloat)offset siteAddress:(NSString *)siteAddress {
+- (UILabel *)labelCellWithWidth:(CGFloat)width rightOffset:(CGFloat)offset siteAddress:(NSString *)siteAddress {
     
     // Create a new view that contains a label offset from the right.
     CGRect frame = CGRectMake(0.0, 0.0, width, 32.0);
-    UIView *view = [[[UIView alloc] initWithFrame:frame] autorelease];
+    //UIView *view = [[[UIView alloc] initWithFrame:frame] autorelease];
     
     frame.size.width = width - offset;
     UILabel *subLabel = [[UILabel alloc] initWithFrame:frame];
@@ -169,10 +177,11 @@
     subLabel.font = [UIFont systemFontOfSize:24.0];
     subLabel.userInteractionEnabled = NO;
     subLabel.text = siteAddress;
+    subLabel.textColor = [UIColor blackColor];
     
-    [view addSubview:subLabel];
-    [subLabel release];
-    return view;
+    //[view insertSubview:subLabel atIndex:idx];
+    //[subLabel release];
+    return subLabel;
 }
 
 #pragma mark * Core transfer code
@@ -450,6 +459,9 @@
 {
     self.activityIndicator.hidden = YES;
     self.cancelButton.enabled = NO;
+    pickerView = [[UIPickerView alloc] init];
+    pickerView.backgroundColor = [UIColor whiteColor];
+    [pickerView setDataSource:self];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }

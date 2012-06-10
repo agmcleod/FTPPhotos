@@ -13,7 +13,7 @@ enum {
     kSendBufferSize = 32768
 };
 
-@interface FTPViewController : UIViewController<NSStreamDelegate> {
+@interface FTPViewController : UIViewController<NSStreamDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     NSInteger photoIndexToUpload;
     
     // fields for ftp form
@@ -28,9 +28,11 @@ enum {
     UILabel *passwordLabel;
     UILabel *statusLabel;
     NSMutableArray *photos;
+    NSMutableArray *sites;
     UIButton *uploadButton;
     UIButton *cancelButton;
     UIButton *selectSiteButton;
+    UIPickerView *pickerView;
     
     // variables for sending the FTP request
     NSOutputStream *_networkStream;
@@ -56,11 +58,13 @@ enum {
 @property (nonatomic, retain) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, retain) IBOutlet UILabel *passwordLabel;
 @property (nonatomic, retain) NSMutableArray *photos;
+@property (nonatomic, retain) NSMutableArray *sites;
 @property (nonatomic, retain) IBOutlet UIButton *uploadButton;
 @property (nonatomic, retain) IBOutlet UILabel *statusLabel;
 @property (nonatomic, retain) IBOutlet UIButton *cancelButton;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView * activityIndicator;
 @property (nonatomic, retain) IBOutlet UIButton *selectSiteButton;
+@property (nonatomic, retain) IBOutlet UIPickerView *pickerView;
 
 @property (nonatomic, readonly) BOOL isSending;
 @property (nonatomic, retain) NSOutputStream *networkStream;
@@ -86,6 +90,6 @@ enum {
 - (void)_sendNextPhoto;
 - (void)resetStreams;
 - (NSString *)applicationDocumentsDirectory;
-- (UIView *)labelCellWithWidth:(CGFloat)width rightOffset:(CGFloat)offset siteAddress:(NSString *)siteAddress;
+- (UILabel *)labelCellWithWidth:(CGFloat)width rightOffset:(CGFloat)offset siteAddress:(NSString *)siteAddress;
 
 @end
